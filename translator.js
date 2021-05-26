@@ -60,6 +60,7 @@ class Translator {
         if (!message.content) return;
         const content = await this.translate(message.content, { from, to })
         if(!content || content === message.content) return;
+        message.delete()
         return { content: `\`${message.member.nickname ? message.member.nickname : message.author.username}:\` ${content}`, files: message.attachments.map(x => { return { attachment: x.proxyURL, name: x.name } }) }
     }
 
