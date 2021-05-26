@@ -1,0 +1,16 @@
+{
+  "name": "discord-translator-bot",
+  "version": "1.0.0",
+  "description": "this bot will help you to translate your discord message by auto detecting them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ctk",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "node-emoji": "^1.10.0",
+    "translatte": "^3.0.0"
+  }
+}
