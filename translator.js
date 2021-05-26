@@ -62,12 +62,7 @@ class Translator {
         if(!content || content === message.content) return;
         return { content: `\`${message.member.nickname ? message.member.nickname : message.author.username}:\` ${content}`, files: message.attachments.map(x => { return { attachment: x.proxyURL, name: x.name } }) }
     }
-    
-    /**
-     * Send webhook on the channel for trans
-     * @param  {Object} message    
-     * @param  {Object} translation 
-     */
+
 }
 
 
