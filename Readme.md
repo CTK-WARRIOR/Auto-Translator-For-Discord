@@ -2,7 +2,7 @@
 > This bot allows the member of the server setup the translator and as soon as the setup is done, the bot will detect the message of the member and translate it automatically.
 
 ### 🔗 LINKS 
-- 🎥 Tutorial: `Not Uploaded yet`
+- 🎥 Tutorial: https://www.youtube.com/watch?v=9fm5j4ruRAc
 - 😎 Channel: [DBD AND MORE](https://www.youtube.com/channel/UClAFgotVhZ1DGvN57EMY7fA)
 - ⚙ Tools  Used: `translette` | `Discord.js` | `node-emoji` | `fs`
 - 💬 Discord Server: [Ctk's Server](https://withwin.in/dbd)
