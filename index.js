@@ -27,7 +27,7 @@ client.on("message", async (message) => {
 
     const messageChannelId = message.channel.id
 
-    if (channelIdsArr.has(messageChannelId)) {
+    if (channelIdsArr.includes(messageChannelId)) {
         const messageChannel = client.channels.cache.get(messageChannelId);
         if(messageChannel) {
             const messageLang = langsArr[channelIdsArr.indexOf(messageChannelId)]
