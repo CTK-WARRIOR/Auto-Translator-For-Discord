@@ -1,5 +1,8 @@
 {
 	"token": "YOUR TOKEN",
-	"prefix": "!",
-	"base_lang": "en"
+	"channels": {
+		"en": "channel1-en",
+		"hu": "channel1-hu",
+		"jp": "channel1-jp"
+	}
 }
