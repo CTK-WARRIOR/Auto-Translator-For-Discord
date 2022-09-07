@@ -3,6 +3,8 @@ const discord = require("discord.js"),
       fs = require("fs"),
       config = require("./config.json")
 
+const token = config.token
+
 let Translator = require("./translator.js");
 Translator = new Translator()
 
