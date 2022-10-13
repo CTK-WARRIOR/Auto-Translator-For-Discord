@@ -1,29 +1,56 @@
 const discord = require("discord.js"),
       client = new discord.Client(),
       fs = require("fs"),
-      {token, prefix, base_lang} = require("./config.json")
+      config = require("./config.json")
+
+const token = config.token
 
 let Translator = require("./translator.js");
 Translator = new Translator()
 
+const langsArr = [];
+const channelIdsArr = [];
 
-client.on("ready", () => console.log("Translator Bot is connected to Discord."));
+client.on("ready", () => {
+    const langs = Object.getOwnPropertyNames(config.channels)
+    langs.forEach(lang => {
+        const channelId = config.channels[lang]
+
+        langsArr.push(lang)
+        channelIdsArr.push(channelId)
+    });
+
+    console.log(`langs=${langsArr}`)
+    console.log(`channels=${channelIdsArr}`)
+
+    console.log("Translator Bot is connected to Discord.")
+});
 
 client.on("message", async (message) => {
-    if (!message.content.startsWith(prefix) || message.author.bot) {
 
-      const savedData = JSON.parse(fs.readFileSync("./storage/database.json", "utf8"))
-	  if(!savedData[message.author.id]) return;
-	  const translation = await Translator.autoTranslate(message, { from: savedData[message.author.id], to: base_lang});
-	  if(translation) return message.channel.send(translation)
+    const messageChannelId = message.channel.id
+    console.log(`messageChannelId=${messageChannelId}`);
 
-    } else {
+    if (channelIdsArr.includes(messageChannelId)) {
+        const messageChannel = client.channels.cache.get(messageChannelId);
+        console.log(`messageChannel=${messageChannel}`);
+        if(messageChannel) {
+            const messageLang = langsArr[channelIdsArr.indexOf(messageChannelId)]
+            console.log(`messageLang=${messageLang}`);
 
-	const args = message.content.slice(prefix.length).trim().split(' ');
-	const command = args.shift().toLowerCase();
-	if(command === "translate") return require("./commands/translate")(message, args)
+            const translateToChannels = channelIdsArr.filter(c => c !== messageChannelId)
+            for (let i = 0 ; i < translateToChannels.length ; i++) {
+                const langIndex = channelIdsArr.indexOf(translateToChannels[i])
+                const channel = client.channels.cache.get(translateToChannels[i])
+                const toLang = langsArr[langIndex]
+                console.log(`channel=${channel}`);
+                console.log(`toLang=${toLang}`);
+
+                const translation = await Translator.autoTranslate(message, { from: messageLang, to: toLang});
+                if(translation) return channel.send(translation)
+            }
+        }
     }
-    
 })
 
 client.login(token)
